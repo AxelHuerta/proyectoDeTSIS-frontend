@@ -64,9 +64,9 @@ export default function Navbar() {
       <div className="justify-center items-center hidden lg:flex">
         {/* menu area */}
         <ul className="flex items-center text-white">
-          {menuOptions.map((option) => {
+          {menuOptions.map((option, index) => {
             return (
-              <Link to={option.link}>
+              <Link to={option.link} key={index}>
                 <li className="mx-5">{option.text}</li>
               </Link>
             );
@@ -111,19 +111,15 @@ export default function Navbar() {
             icon={<HamburgerIcon className="font-bold text-2xl" />}
           />
           <MenuList className="w-full">
-            {menuOptions.map((option) => {
+            {menuOptions.map((option, index) => {
               return (
-                <Link to={option.link}>
+                <Link to={option.link} key={index}>
                   <MenuItem>{option.text}</MenuItem>
                 </Link>
               );
             })}
             <MenuItem className="text-center">
-              <Link to={`/login`}>
-                <Button colorScheme="white" variant="outline">
-                  Iniciar Sesión
-                </Button>
-              </Link>
+              <Link to={`/login`}>Iniciar Sesión</Link>
             </MenuItem>
           </MenuList>
         </Menu>

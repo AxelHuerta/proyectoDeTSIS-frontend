@@ -118,7 +118,7 @@ export default function LoginInput(props: Props) {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center mx-32">
+      <div className="flex flex-col justify-center items-center mx-6 md:mx-14 lg:mx-30">
         <h2 className="text-2xl font-bold">Iniciar Sesión</h2>
         <FormControl onChange={formOnChange}>
           <Input

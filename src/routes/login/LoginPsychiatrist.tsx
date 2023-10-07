@@ -9,9 +9,13 @@ export default function LoginPsychiatrist() {
   return (
     <>
       <Navbar />
-      <div className="grid grid-cols-2 h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 h-screen">
         <div
-          style={{ background: `url(${imageLink})`, backgroundSize: "cover" }}
+          style={{
+            background: `url(${imageLink})`,
+            backgroundSize: "cover",
+          }}
+          className="hidden md:block"
         ></div>
         <LoginInput loginType="psychiatrist" />
       </div>
