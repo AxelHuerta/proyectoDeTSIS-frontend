@@ -5,9 +5,22 @@ import {
   MenuList,
   MenuItem,
   Avatar,
+  IconButton,
 } from "@chakra-ui/react";
+import {
+  HamburgerIcon,
+  AddIcon,
+  ExternalLinkIcon,
+  RepeatIcon,
+  EditIcon,
+} from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { useUserData } from "../store/Store";
+
+type menuOption = {
+  text: string;
+  link: string;
+};
 
 export default function Navbar() {
   // localhost
@@ -22,6 +35,22 @@ export default function Navbar() {
     setUserType,
     setIsAuth,
   } = useUserData((state) => state);
+
+  // menu options
+  const menuOptions: menuOption[] = [
+    {
+      text: "Inicio",
+      link: "/",
+    },
+    {
+      text: "Psicoeducación",
+      link: "/",
+    },
+    {
+      text: "Solicitar Servicio",
+      link: "/",
+    },
+  ];
 
   // logout
   const logout = () => {
@@ -38,14 +67,19 @@ export default function Navbar() {
       <span className="font-bold text-xl flex items-center text-white">
         Departamento de Psiquiatría
       </span>
-      <div className="flex justify-center items-center">
+      <div className="justify-center items-center hidden lg:flex">
+        {/* menu area */}
         <ul className="flex items-center text-white">
-          <Link to={`/`}>
-            <li className="mx-5">Inicio</li>
-          </Link>
-          <li className="mx-5">Psicoeducación</li>
-          <li className="mx-5">Solicitar Servicio</li>
+          {menuOptions.map((option) => {
+            return (
+              <Link to={option.link}>
+                <li className="mx-5">{option.text}</li>
+              </Link>
+            );
+          })}
         </ul>
+
+        {/* login area */}
         {!isAuth ? (
           <Link to={`/login`}>
             <Button
@@ -74,6 +108,23 @@ export default function Navbar() {
           </Menu>
         )}
       </div>
+      {/* menu responsive area */}
+      <Menu>
+        <MenuButton
+          as={IconButton}
+          colorScheme="rgba(0,0,0,0)"
+          icon={<HamburgerIcon className="font-bold text-2xl" />}
+        />
+        <MenuList className="w-full">
+          {menuOptions.map((option) => {
+            return (
+              <Link to={option.link}>
+                <MenuItem className="p-12">{option.text}</MenuItem>
+              </Link>
+            );
+          })}
+        </MenuList>
+      </Menu>
     </nav>
   );
 }
