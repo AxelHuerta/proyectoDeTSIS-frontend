@@ -7,13 +7,7 @@ import {
   Avatar,
   IconButton,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  AddIcon,
-  ExternalLinkIcon,
-  RepeatIcon,
-  EditIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 import { useUserData } from "../store/Store";
 
