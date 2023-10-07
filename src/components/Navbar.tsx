@@ -57,7 +57,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-teal-500 flex justify-between p-5 fixed w-full z-50">
+    <nav className="bg-teal-500 flex justify-between p-5 top-0 fixed w-full z-50">
       <span className="font-bold text-xl flex items-center text-white">
         Departamento de Psiquiatría
       </span>
@@ -103,22 +103,31 @@ export default function Navbar() {
         )}
       </div>
       {/* menu responsive area */}
-      <Menu>
-        <MenuButton
-          as={IconButton}
-          colorScheme="rgba(0,0,0,0)"
-          icon={<HamburgerIcon className="font-bold text-2xl" />}
-        />
-        <MenuList className="w-full">
-          {menuOptions.map((option) => {
-            return (
-              <Link to={option.link}>
-                <MenuItem className="p-12">{option.text}</MenuItem>
+      <div className="lg:hidden">
+        <Menu>
+          <MenuButton
+            as={IconButton}
+            colorScheme="rgba(0,0,0,0)"
+            icon={<HamburgerIcon className="font-bold text-2xl" />}
+          />
+          <MenuList className="w-full">
+            {menuOptions.map((option) => {
+              return (
+                <Link to={option.link}>
+                  <MenuItem>{option.text}</MenuItem>
+                </Link>
+              );
+            })}
+            <MenuItem className="text-center">
+              <Link to={`/login`}>
+                <Button colorScheme="white" variant="outline">
+                  Iniciar Sesión
+                </Button>
               </Link>
-            );
-          })}
-        </MenuList>
-      </Menu>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </div>
     </nav>
   );
 }

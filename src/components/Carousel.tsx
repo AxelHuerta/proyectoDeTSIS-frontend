@@ -12,13 +12,13 @@ export default function Carousel() {
   const [emblaRef] = useEmblaCarousel({ loop: true }, [Autoplay()]);
 
   return (
-    <div className="embla" ref={emblaRef}>
+    <div className="embla mt-26" ref={emblaRef}>
       {" "}
       <div className="embla__container">
         {sliderImages.map((sliderImage, index) => {
           return (
             <div
-              className="embla__slide w-full h-[90vh] flex flex-col justify-center items-center"
+              className="embla__slide w-full h-screen flex flex-col justify-center items-center"
               style={{
                 background: `url('${sliderImage}')`,
                 backgroundRepeat: "no-repeat",
@@ -26,11 +26,11 @@ export default function Carousel() {
               }}
               key={index}
             >
-              <div className="w-full h-full flex flex-col justify-center items-center text-white px-20 bg-[rgba(0,0,0,.5)]">
+              <div className="w-full h-full flex flex-col justify-center items-center text-white px-5 sm:px-20 bg-[rgba(0,0,0,.5)]">
                 <h2 className="text-2xl font-bold max-w-lg">
                   El departamento de psíquiatria ofrece:
                 </h2>
-                <p className="m-5 p-5 max-w-[1024px]">
+                <p className="sm:m-5 sm:p-5 max-w-[1024px]">
                   Lorem ipsum dolor sit amet, officia excepteur ex fugiat
                   reprehenderit enim labore culpa sint ad nisi Lorem pariatur
                   mollit ex esse exercitation amet. Nisi anim cupidatat
@@ -40,10 +40,7 @@ export default function Carousel() {
                   esse ea nulla sunt ex occaecat reprehenderit commodo officia
                   dolor Lorem duis laboris cupidatat officia voluptate. Culpa
                   proident adipisicing id nulla nisi laboris ex in Lorem sunt
-                  duis officia eiusmod. Aliqua reprehenderit commodo ex non
-                  excepteur duis sunt velit enim. Voluptate laboris sint
-                  cupidatat ullamco ut ea consectetur et est culpa et culpa
-                  duis.
+                  duis officia eiusmod.
                 </p>
               </div>
             </div>

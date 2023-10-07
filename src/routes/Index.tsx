@@ -18,11 +18,11 @@ export default function Index() {
       {/* slider */}
       <Carousel />
       {/* infografias */}
-      <div className="m-20">
-        <h1 className="text-2xl uppercase font-bold text-center my-5">
+      <div className="mx-0 md:mx-10 my-40">
+        <h1 className="text-2xl uppercase font-bold text-center">
           Infografías
         </h1>
-        <div className="grid grid-cols-3 gap-10 m-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 m-10">
           <Card>
             <CardHeader>
               <Heading size="md">Lorem ipsum</Heading>
@@ -30,7 +30,9 @@ export default function Index() {
             <CardBody>
               <Text>
                 Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
-                sint cillum sint consectetur cupidatat.
+                sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit
+                amet, qui minim labore adipisicing minim sint cillum sint
+                consectetur cupidatat.
               </Text>
             </CardBody>
             <CardFooter>
@@ -44,7 +46,9 @@ export default function Index() {
             <CardBody>
               <Text>
                 Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
-                sint cillum sint consectetur cupidatat.
+                sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit
+                amet, qui minim labore adipisicing minim sint cillum sint
+                consectetur cupidatat.
               </Text>
             </CardBody>
             <CardFooter>
@@ -58,7 +62,9 @@ export default function Index() {
             <CardBody>
               <Text>
                 Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
-                sint cillum sint consectetur cupidatat.
+                sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit
+                amet, qui minim labore adipisicing minim sint cillum sint
+                consectetur cupidatat.
               </Text>
             </CardBody>
             <CardFooter>
@@ -69,7 +75,7 @@ export default function Index() {
       </div>
 
       {/* el otro */}
-      <div className="grid grid-cols-2 gap-10 bg-gray-300 p-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-gray-300 p-20">
         <div className="m-auto">
           <h2 className="text-2xl font-bold mb-5">Atención Clínica</h2>
           <p className="mb-5">
@@ -81,7 +87,10 @@ export default function Index() {
           <Button>Consultar información</Button>
         </div>
         <div className="flex justify-center">
-          <Image src="https://images.pexels.com/photos/6712704/pexels-photo-6712704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+          <Image
+            src="https://images.pexels.com/photos/6712704/pexels-photo-6712704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+            className="hidden md:block"
+          />
         </div>
       </div>
     </>
