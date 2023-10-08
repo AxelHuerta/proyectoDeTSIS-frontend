@@ -42,7 +42,7 @@ export default function Navbar() {
     },
     {
       text: "Solicitar Servicio",
-      link: "/",
+      link: "/services",
     },
   ];
 
@@ -111,6 +111,11 @@ export default function Navbar() {
             icon={<HamburgerIcon className="font-bold text-2xl" />}
           />
           <MenuList className="w-full">
+            {isAuth ? (
+              <MenuItem className="font-bold hidden">
+                {`¡Hola, ${nombres}!`}
+              </MenuItem>
+            ) : null}
             {menuOptions.map((option, index) => {
               return (
                 <Link to={option.link} key={index}>
@@ -118,9 +123,13 @@ export default function Navbar() {
                 </Link>
               );
             })}
-            <MenuItem className="text-center">
-              <Link to={`/login`}>Iniciar Sesión</Link>
-            </MenuItem>
+            {isAuth ? (
+              <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
+            ) : (
+              <MenuItem>
+                <Link to={`/login`}>Iniciar Sesión</Link>
+              </MenuItem>
+            )}
           </MenuList>
         </Menu>
       </div>

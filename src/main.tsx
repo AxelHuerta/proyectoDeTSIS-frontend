@@ -7,6 +7,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import LoginPage from "./routes/LoginPage.tsx";
 import LoginStudent from "./routes/login/LoginStudent.tsx";
 import LoginPsychiatrist from "./routes/login/LoginPsychiatrist.tsx";
+import Services from "./routes/Services.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
   {
     path: "/login/psychiatrist",
     element: <LoginPsychiatrist />,
+  },
+  {
+    path: "/services",
+    element: <Services />,
   },
 ]);
 
