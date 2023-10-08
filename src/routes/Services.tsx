@@ -22,8 +22,14 @@ export default function Services() {
     migrante: false,
     pueblosIndigenas: false,
   });
+
   const [dateForm, setDateForm] = useState("");
   const [timeForm, setTimeForm] = useState("");
+
+  const [termsForm, setTermsForm] = useState({
+    shareData: false,
+    truthful: false,
+  });
 
   // save input data
   const dateTimeFormOnChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,9 +37,6 @@ export default function Services() {
       setDateForm(format(selected, "PP"));
     }
     setTimeForm(e.target.value);
-    // TODO: delete this
-    console.log(timeForm);
-    console.log(selected ? format(selected, "PP") : "no");
   };
 
   // switch button values
@@ -44,9 +47,22 @@ export default function Services() {
       ...identificationData,
       [name]: checked,
     });
+  };
 
-    // TODO: delete this
+  // switch button values
+  const handleTermsOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+
+    setTermsForm({
+      ...termsForm,
+      [name]: checked,
+    });
+  };
+
+  const handleForm = () => {
     console.log(identificationData);
+    console.log({ dateForm, timeForm });
+    console.log(termsForm);
   };
 
   return (
@@ -145,20 +161,34 @@ export default function Services() {
                 Autorizo compartir mis datos de contacto con la autoridad
                 academica
               </FormLabel>
-              <Switch id="discapacidad" size="lg" colorScheme="teal" />
+              <Switch
+                id="shareData"
+                size="lg"
+                colorScheme="teal"
+                name="shareData"
+                onChange={handleTermsOnChange}
+              />
             </div>
             <div className="flex justify-between items-center w-full my-4">
               <FormLabel htmlFor="discapacidad" mb="0">
                 Bajo la protesta de decir la verdad, manifiesto que la
                 información proporcionada es verídica
               </FormLabel>
-              <Switch id="discapacidad" size="lg" colorScheme="teal" />
+              <Switch
+                id="truthful"
+                size="lg"
+                colorScheme="teal"
+                name="truthful"
+                onChange={handleTermsOnChange}
+              />
             </div>
           </FormControl>
         </CardBody>
       </Card>
       <div className="text-center my-5">
-        <Button colorScheme="teal">Registar solicitud</Button>
+        <Button colorScheme="teal" onClick={handleForm}>
+          Registar solicitud
+        </Button>
       </div>
     </>
   );
