@@ -7,12 +7,12 @@ import {
   Heading,
   Button,
 } from "@chakra-ui/react";
-import NavbarPsychiatrist from "../../components/NavbarPsychiatrist";
+import Navbar from "../../components/Navbar";
 
 function IndexPsychiatrist() {
   return (
     <div>
-      <NavbarPsychiatrist />
+      <Navbar />
       <div className="pt-28 max-w-[1080px] mx-auto">
         <h1 className="text-2xl font-bold">
           Portal de Servicios Psicológicos Integrados

@@ -22,6 +22,7 @@ export default function Navbar() {
     isAuth,
     nombres,
     apellidoPaterno,
+    userType,
     setNombres,
     setApellidoPaterno,
     setApellidoMaterno,
@@ -30,6 +31,7 @@ export default function Navbar() {
     setIsAuth,
   } = useUserData((state) => state);
 
+  // TODO: psychiatrist links
   // menu options
   const menuOptions: menuOption[] = [
     {
@@ -37,11 +39,13 @@ export default function Navbar() {
       link: "/",
     },
     {
-      text: "Psicoeducación",
+      text: `${userType == "psychiatrist" ? "Pacientes" : "Psicoeducación"}`,
       link: "/",
     },
     {
-      text: "Solicitar Servicio",
+      text: `${
+        userType == "psychiatrist" ? "Calendario" : "Solicitar Servicio"
+      }`,
       link: "/services",
     },
   ];
@@ -102,6 +106,7 @@ export default function Navbar() {
           </Menu>
         )}
       </div>
+
       {/* menu responsive area */}
       <div className="lg:hidden">
         <Menu>

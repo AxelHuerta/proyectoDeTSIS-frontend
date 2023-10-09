@@ -59,8 +59,12 @@ export default function LoginInput(props: Props) {
         `http://localhost:8080/api/${
           props.loginType == "student" ? "alumnos" : "psiquiatras"
         }/login`,
-        // TODO: psychiatrist case
-        { matricula: formData.id, password: formData.password },
+        props.loginType == "student"
+          ? {
+              matricula: formData.id,
+              password: formData.password,
+            }
+          : { numTrabajador: formData.id, password: formData.password },
       )
       .then((res) => {
         if (res.data.error) {
@@ -68,8 +72,7 @@ export default function LoginInput(props: Props) {
         }
         console.log(res.data);
         setId(res.data.id);
-        // incongruencia entre 'nombre' y 'nombres' en el DTO de POST alumnos/login y el de GET alumnos
-        setNombres(res.data.nombre);
+        setNombres(res.data.nombres);
         setApellidoPaterno(res.data.apellidoPaterno);
         setApellidoMaterno(res.data.apellidoMaterno);
         setIsAuth(true);
