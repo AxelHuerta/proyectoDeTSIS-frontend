@@ -13,7 +13,7 @@ function IndexPsychiatrist() {
   return (
     <div>
       <Navbar />
-      <div className="pt-28 max-w-[1080px] mx-auto">
+      <div className="pt-32 max-w-[1080px] mx-auto">
         <h1 className="text-2xl font-bold">
           Portal de Servicios Psicológicos Integrados
         </h1>
@@ -21,7 +21,7 @@ function IndexPsychiatrist() {
           El{" "}
           <span className="font-bold">
             Portal de Servicios Psicológicos Integrados
-          </span>{" "}
+          </span>
           es una herramienta que el departamento de psiquiatría pone a
           disposición de las y los psicologos para facilitar su labor cotidiana.
         </p>
@@ -38,10 +38,11 @@ function IndexPsychiatrist() {
           commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint
           cupidatat ullamco ut ea consectetur et est culpa et culpa duis.
         </p>
+        {/* tools */}
         <h2 className="text-2xl font-bold my-10 text-center">
           Esta herrmaiente permite
         </h2>
-        <div className="bg-teal-400 grid grid-cols-3 gap-4 p-5">
+        <div className="bg-teal-400 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 p-5">
           <Card>
             <CardHeader>
               <Heading size="sm">Tener control de los pacientes</Heading>
