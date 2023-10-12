@@ -26,10 +26,10 @@ import {
 } from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import InputSwitch from "../../../components/InputSwitch";
-import { useUserData } from "../../../store/Store";
+import InputSwitch from "../../components/InputSwitch";
+import { useUserData } from "../../store/Store";
 import { Link } from "react-router-dom";
-import Navbar from "../../../components/Navbar";
+import Navbar from "../../components/Navbar";
 import axios from "axios";
 
 type Psiquiatra = {
