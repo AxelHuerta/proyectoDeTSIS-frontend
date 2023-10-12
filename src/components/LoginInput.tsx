@@ -71,7 +71,11 @@ export default function LoginInput(props: Props) {
           console.log("Hay un error");
         }
         console.log(res.data);
-        setId(res.data.id);
+        setId(
+          props.loginType == "student"
+            ? res.data.matricula
+            : res.data.numTrabajador,
+        );
         setNombres(res.data.nombres);
         setApellidoPaterno(res.data.apellidoPaterno);
         setApellidoMaterno(res.data.apellidoMaterno);

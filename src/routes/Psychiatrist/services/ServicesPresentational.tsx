@@ -1,4 +1,3 @@
-import Navbar from "../components/Navbar";
 import {
   Card,
   CardBody,
@@ -18,13 +17,19 @@ import {
   AlertDescription,
   CloseButton,
 } from "@chakra-ui/react";
-import { useState, ChangeEvent, useEffect } from "react";
-import { format } from "date-fns";
+import {
+  useState,
+  ChangeEvent,
+  useEffect,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
-import InputSwitch from "../components/InputSwitch";
-import { useUserData } from "../store/Store";
+import InputSwitch from "../../../components/InputSwitch";
+import { useUserData } from "../../../store/Store";
 import { Link } from "react-router-dom";
+import Navbar from "../../../components/Navbar";
 import axios from "axios";
 
 type Psiquiatra = {
@@ -44,9 +49,35 @@ type Cita = {
   migrante: boolean;
 };
 
-export default function Services() {
-  const [selected, setSelected] = useState<Date>();
+type Props = {
+  selected: Date | undefined;
+  setSelected: Dispatch<SetStateAction<Date | undefined>>;
+  identificationData: {
+    discapacidad: boolean;
+    migrante: boolean;
+    comunidadIndigena: boolean;
+  };
+  // TODO: add type
+  setIdentificationData: (identificationData: {
+    discapacidad: boolean;
+    migrante: boolean;
+    comunidadIndigena: boolean;
+  }) => void;
+  dateForm: string;
+  timeForm: string;
+  motivoCitaForm: string;
+  termsForm: { shareData: boolean; truthful: boolean };
+  isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
+  psiquiatra: string;
+  dateTimeFormOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  motivoCitaDataForm: (e: ChangeEvent<HTMLInputElement>) => void;
+  psiquiatraDataForm: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleSwitchChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleTermsOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
 
+export default function ServicesPresentational(props: Props) {
   // Alert
   const {
     isOpen: isVisible,
@@ -56,22 +87,6 @@ export default function Services() {
 
   // localhost
   const { isAuth, id } = useUserData((state) => state);
-
-  // form info
-  const [identificationData, setIdentificationData] = useState({
-    discapacidad: false,
-    migrante: false,
-    comunidadadIndigena: false,
-  });
-
-  const [dateForm, setDateForm] = useState("");
-  const [timeForm, setTimeForm] = useState("");
-  const [motivoCitaForm, setMotivoCitaForm] = useState("");
-
-  const [termsForm, setTermsForm] = useState({
-    shareData: false,
-    truthful: false,
-  });
 
   // time options
   const hours = [
@@ -84,58 +99,15 @@ export default function Services() {
     "3:00 pm",
   ];
 
-  // isLoading varible
-  const [isLoading, setIsLoading] = useState(true);
-
   // psiquiatras list
   const [psiquiatras, setPsiquiatras] = useState<Psiquiatra[]>([]);
-
-  // psiquiatra
-  const [psiquiatra, setPsiquiatra] = useState("");
-
-  // save input data
-  const dateTimeFormOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (selected) {
-      setDateForm(format(selected, "dd/MM/yyyy"));
-    }
-    setTimeForm(e.target.value);
-  };
-
-  // motivo cita
-  const motivoCitaDataForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMotivoCitaForm(e.target.value);
-  };
-
-  // pshychiatrist info
-  const psiquiatraDataForm = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPsiquiatra(e.target.value);
-  };
-
-  // switch button values
-  const handleSwitchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-
-    setIdentificationData({
-      ...identificationData,
-      [name]: checked,
-    });
-  };
-
-  const handleTermsOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, checked } = e.target;
-
-    setTermsForm({
-      ...termsForm,
-      [name]: checked,
-    });
-  };
 
   const getPsiquiatras = async () => {
     await axios
       .get("http://localhost:8080/api/psiquiatras")
       .then((res) => {
         setPsiquiatras(res.data);
-        setIsLoading(false);
+        props.setIsLoading(false);
       })
       // TODO: handleErrors
       .catch(() =>
@@ -152,12 +124,12 @@ export default function Services() {
   // post cita
   const handleForm = () => {
     if (
-      !termsForm.truthful ||
-      !termsForm.shareData ||
-      dateForm == "" ||
-      timeForm == "" ||
-      motivoCitaForm == "" ||
-      psiquiatra == ""
+      !props.termsForm.truthful ||
+      !props.termsForm.shareData ||
+      props.dateForm == "" ||
+      props.timeForm == "" ||
+      props.motivoCitaForm == "" ||
+      props.psiquiatra == ""
     ) {
       onOpen();
       return;
@@ -167,13 +139,13 @@ export default function Services() {
     onClose();
 
     let newCita: Cita = {
-      NumTrabajador: psiquiatra,
-      fecha: dateForm,
-      hora: timeForm,
-      motivoCita: motivoCitaForm,
-      discapacidad: identificationData.discapacidad,
-      comunidadIndigena: identificationData.comunidadadIndigena,
-      migrante: identificationData.migrante,
+      NumTrabajador: props.psiquiatra,
+      fecha: props.dateForm,
+      hora: props.timeForm,
+      motivoCita: props.motivoCitaForm,
+      discapacidad: props.identificationData.discapacidad,
+      comunidadIndigena: props.identificationData.comunidadIndigena,
+      migrante: props.identificationData.migrante,
     };
     console.log(newCita);
 
@@ -208,7 +180,7 @@ export default function Services() {
   return (
     <>
       <Navbar />
-      {isLoading ? (
+      {props.isLoading ? (
         <div className="h-[90vh] flex justify-center items-center">
           <Spinner
             thickness="6px"
@@ -237,19 +209,19 @@ export default function Services() {
                   <InputSwitch
                     name="discapacidad"
                     text="Persona con discapacidad"
-                    onChange={handleSwitchChange}
+                    onChange={props.handleSwitchChange}
                   />
                   {/* migrante */}
                   <InputSwitch
                     name="migrante"
                     text="Persona migrante"
-                    onChange={handleSwitchChange}
+                    onChange={props.handleSwitchChange}
                   />
                   {/* pueblos indigenas */}
                   <InputSwitch
                     name="comunidadadIndigena"
                     text="Pueblos y comunidades indigenas"
-                    onChange={handleSwitchChange}
+                    onChange={props.handleSwitchChange}
                   />
                 </FormControl>
               </CardBody>
@@ -262,13 +234,13 @@ export default function Services() {
                 <FormControl
                   alignItems="center"
                   className="mt-8 flex flex-col"
-                  onChange={dateTimeFormOnChange}
+                  onChange={props.dateTimeFormOnChange}
                 >
                   {/* date */}
                   <DayPicker
                     mode="single"
-                    selected={selected}
-                    onSelect={setSelected}
+                    selected={props.selected}
+                    onSelect={props.setSelected}
                   />
                   {/* hour */}
                   <Select
@@ -295,7 +267,7 @@ export default function Services() {
                 <FormControl
                   alignItems="center"
                   className="mt-8 flex flex-col"
-                  onChange={motivoCitaDataForm}
+                  onChange={props.motivoCitaDataForm}
                 >
                   <Textarea
                     placeholder="Motivo por el cual solicita orientación psícologica"
@@ -316,7 +288,7 @@ export default function Services() {
                 <FormControl
                   alignItems="center"
                   className="mt-8 flex flex-col"
-                  onChange={psiquiatraDataForm}
+                  onChange={props.psiquiatraDataForm}
                 >
                   <Select
                     placeholder="Selecciona un psiquiatra"
@@ -358,7 +330,7 @@ export default function Services() {
                       size="lg"
                       colorScheme="teal"
                       name="shareData"
-                      onChange={handleTermsOnChange}
+                      onChange={props.handleTermsOnChange}
                     />
                   </div>
                   <div className="flex justify-between items-center w-full my-4">
@@ -371,7 +343,7 @@ export default function Services() {
                       size="lg"
                       colorScheme="teal"
                       name="truthful"
-                      onChange={handleTermsOnChange}
+                      onChange={props.handleTermsOnChange}
                     />
                   </div>
                 </FormControl>
