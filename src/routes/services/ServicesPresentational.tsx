@@ -31,6 +31,7 @@ import { useUserData } from "../../store/Store";
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
+import { format } from "date-fns";
 
 type Psiquiatra = {
   nombres: string;
@@ -50,7 +51,7 @@ type Cita = {
 };
 
 type Props = {
-  selected: Date | undefined;
+  selected: Date;
   setSelected: Dispatch<SetStateAction<Date | undefined>>;
   identificationData: {
     discapacidad: boolean;
@@ -63,7 +64,6 @@ type Props = {
     migrante: boolean;
     comunidadIndigena: boolean;
   }) => void;
-  dateForm: string;
   timeForm: string;
   motivoCitaForm: string;
   termsForm: { shareData: boolean; truthful: boolean };
@@ -75,6 +75,8 @@ type Props = {
   psiquiatraDataForm: (e: ChangeEvent<HTMLInputElement>) => void;
   handleSwitchChange: (e: ChangeEvent<HTMLInputElement>) => void;
   handleTermsOnChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  alertMessage: { title: string; text: string };
+  setAlertMessagge: Dispatch<SetStateAction<{ title: string; text: string }>>;
 };
 
 export default function ServicesPresentational(props: Props) {
@@ -121,16 +123,32 @@ export default function ServicesPresentational(props: Props) {
   }, []);
 
   // TODO:
-  // post cita
   const handleForm = () => {
     if (
       !props.termsForm.truthful ||
       !props.termsForm.shareData ||
-      props.dateForm == "" ||
       props.timeForm == "" ||
       props.motivoCitaForm == "" ||
       props.psiquiatra == ""
     ) {
+      props.setAlertMessagge({
+        title: "Datos faltantes",
+        text: "Se deben llenar todos los datos",
+      });
+      onOpen();
+      return;
+    }
+
+    const today = new Date();
+    if (props.selected < today) {
+      console.log("today", today);
+      console.log("seleccioando", today);
+
+      console.log("La fecha tiene que ser después de hoy");
+      props.setAlertMessagge({
+        title: "Fecha invalida",
+        text: "Debes seleccionar una fecha valida",
+      });
       onOpen();
       return;
     }
@@ -140,7 +158,7 @@ export default function ServicesPresentational(props: Props) {
 
     let newCita: Cita = {
       NumTrabajador: props.psiquiatra,
-      fecha: props.dateForm,
+      fecha: format(props.selected, "dd/MM/yyyy"),
       hora: props.timeForm,
       motivoCita: props.motivoCitaForm,
       discapacidad: props.identificationData.discapacidad,
@@ -354,9 +372,9 @@ export default function ServicesPresentational(props: Props) {
                 <Alert status="warning">
                   <AlertIcon />
                   <Box className="mx-auto">
-                    <AlertTitle>Datos faltantes</AlertTitle>
+                    <AlertTitle>{props.alertMessage.title}</AlertTitle>
                     <AlertDescription>
-                      Debes completar el formulario
+                      {props.alertMessage.text}
                     </AlertDescription>
                   </Box>
                   <CloseButton

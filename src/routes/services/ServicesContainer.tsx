@@ -1,10 +1,11 @@
 import { useState, ChangeEvent } from "react";
-import { format } from "date-fns";
 import "react-day-picker/dist/style.css";
 import ServicesPresentational from "./ServicesPresentational";
 
 export default function ServicesContainer() {
-  const [selected, setSelected] = useState<Date>();
+  const [selected, setSelected] = useState<Date | undefined>(
+    new Date("01/01/2000"),
+  );
 
   // form info
   const [identificationData, setIdentificationData] = useState({
@@ -13,9 +14,12 @@ export default function ServicesContainer() {
     comunidadIndigena: false,
   });
 
-  const [dateForm, setDateForm] = useState("");
   const [timeForm, setTimeForm] = useState("");
   const [motivoCitaForm, setMotivoCitaForm] = useState("");
+  const [alertMessage, setAlertMessage] = useState({
+    title: "",
+    text: "",
+  });
 
   const [termsForm, setTermsForm] = useState({
     shareData: false,
@@ -30,9 +34,6 @@ export default function ServicesContainer() {
 
   // save input data
   const dateTimeFormOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (selected) {
-      setDateForm(format(selected, "dd/MM/yyyy"));
-    }
     setTimeForm(e.target.value);
   };
 
@@ -71,7 +72,6 @@ export default function ServicesContainer() {
       setSelected={setSelected}
       identificationData={identificationData}
       setIdentificationData={setIdentificationData}
-      dateForm={dateForm}
       timeForm={timeForm}
       motivoCitaForm={motivoCitaForm}
       termsForm={termsForm}
@@ -83,6 +83,8 @@ export default function ServicesContainer() {
       psiquiatraDataForm={psiquiatraDataForm}
       handleSwitchChange={handleSwitchChange}
       handleTermsOnChange={handleTermsOnChange}
+      alertMessage={alertMessage}
+      setAlertMessagge={setAlertMessage}
     />
   );
 }
