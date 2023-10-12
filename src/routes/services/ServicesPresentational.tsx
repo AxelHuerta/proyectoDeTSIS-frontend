@@ -103,6 +103,7 @@ export default function ServicesPresentational(props: Props) {
 
   // psiquiatras list
   const [psiquiatras, setPsiquiatras] = useState<Psiquiatra[]>([]);
+  const [addCitaSuccess, setAddCitaSuccess] = useState(false);
 
   const getPsiquiatras = async () => {
     await axios
@@ -173,7 +174,10 @@ export default function ServicesPresentational(props: Props) {
   const createCita = async (cita: Cita) => {
     await axios
       .post(`http://localhost:8080/api/alumnos/${id}/citas`, cita)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        setAddCitaSuccess(true);
+      })
       .catch((e: any) => console.log("Hubo un error al agendar la cita", e));
   };
 
@@ -195,9 +199,22 @@ export default function ServicesPresentational(props: Props) {
     );
   }
 
+  if (addCitaSuccess) {
+    return (
+      <div className="flex min-h-screen justify-center items-center flex-col">
+        <h1 className="text-2xl">Tu cita ha sido creada con exito</h1>
+        <Link to={"/"}>
+          <Button colorScheme="teal" className="mt-4">
+            Volver al inicio
+          </Button>
+        </Link>
+      </div>
+    );
+  }
   return (
     <>
       <Navbar />
+
       {props.isLoading ? (
         <div className="h-[90vh] flex justify-center items-center">
           <Spinner
