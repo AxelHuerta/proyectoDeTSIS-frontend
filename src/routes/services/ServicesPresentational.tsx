@@ -51,7 +51,7 @@ type Cita = {
 };
 
 type Props = {
-  selected: Date;
+  selected: Date | undefined;
   setSelected: Dispatch<SetStateAction<Date | undefined>>;
   identificationData: {
     discapacidad: boolean;
@@ -141,7 +141,7 @@ export default function ServicesPresentational(props: Props) {
     }
 
     const today = new Date();
-    if (props.selected < today) {
+    if (props.selected && props.selected < today) {
       console.log("today", today);
       console.log("seleccioando", today);
 
@@ -159,7 +159,7 @@ export default function ServicesPresentational(props: Props) {
 
     let newCita: Cita = {
       NumTrabajador: props.psiquiatra,
-      fecha: format(props.selected, "dd/MM/yyyy"),
+      fecha: format(props.selected ? props.selected : new Date(), "dd/MM/yyyy"),
       hora: props.timeForm,
       motivoCita: props.motivoCitaForm,
       discapacidad: props.identificationData.discapacidad,
