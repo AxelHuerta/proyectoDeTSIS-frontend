@@ -10,6 +10,7 @@ import LoginPsychiatrist from "./routes/login/LoginPsychiatrist.tsx";
 import ServicesContainer from "./routes/services/ServicesContainer.tsx";
 import Patients from "./routes/Psychiatrist/Patients.tsx";
 import Appointments from "./routes/Psychiatrist/Appointments.tsx";
+import AppointmentDetails from "./routes/Psychiatrist/AppointmentDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/citas",
     element: <Appointments />,
+  },
+  {
+    path: "/citas/:citaId",
+    element: <AppointmentDetails />,
   },
 ]);
 

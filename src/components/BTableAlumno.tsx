@@ -17,7 +17,7 @@ export default function BTableAlumno(props: Props) {
             key={`${alumno.nombres}${alumno.apellidoPaterno}${alumno.apellidoMaterno}`}
           >
             <Link to={"/"} className="sm:grid sm:grid-cols-3 sm:text-center">
-              <li className="grid grid-cols-2">
+              <li className="grid grid-cols-2 sm:block">
                 <span className="font-bold py-2 sm:hidden">Nombres</span>
                 <p className="py-2">{alumno.nombres}</p>
               </li>

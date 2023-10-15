@@ -1,11 +1,18 @@
 import { Link } from "react-router-dom";
 import { Cita } from "../types/Cita";
+import { useUserData } from "../store/Store";
 
 type Props = {
   citaList: Cita[];
 };
 
 export default function BTableCita(props: Props) {
+  const { setCurrentCita } = useUserData((state) => state);
+
+  const handleOnClick = (id: number, matricula: string) => {
+    setCurrentCita({ id: id, matricula: matricula });
+  };
+
   return (
     <>
       {props.citaList.map((cita, index) => {
@@ -14,14 +21,16 @@ export default function BTableCita(props: Props) {
             className={`${
               index % 2 == 0 ? "bg-teal-50" : "bg-teal-100"
             } rounded-md py-2 sm:flex flex-col justify-around my-2`}
-            // TODO: id cita
-            key={index}
+            key={cita.id}
           >
-            <Link to={"/"} className="sm:grid sm:grid-cols-3 sm:text-center">
-              <li className="grid grid-cols-2">
+            <Link
+              to={`/citas/${cita.id}`}
+              onClick={() => handleOnClick(cita.id, cita.matriculaAlumno)}
+              className="sm:grid sm:grid-cols-3 sm:text-center"
+            >
+              <li className="grid grid-cols-2 sm:block">
                 <span className="font-bold py-2 sm:hidden">ID cita</span>
-                {/* TODO: id cita */}
-                <p className="py-2">{index}</p>
+                <p className="py-2">{cita.id}</p>
               </li>
               <li className="grid grid-cols-2 sm:block">
                 <span className="font-bold py-2 sm:hidden">Fecha</span>

@@ -8,15 +8,19 @@ type State = {
   nombres: string;
   apellidoPaterno: string;
   apellidoMaterno: string;
+  currentCita: { id: number; matricula: string };
 };
 
 type Actions = {
+  // user
   setIsAuth: (isAuth: boolean) => void;
   setUserType: (userType: string) => void;
   setId: (id: string) => void;
   setNombres: (nombres: string) => void;
   setApellidoPaterno: (apellidoPaterno: string) => void;
   setApellidoMaterno: (apellidoPaterno: string) => void;
+  // appointment
+  setCurrentCita: (currentCita: { id: number; matricula: string }) => void;
 };
 
 export const useUserData = create(
@@ -28,6 +32,10 @@ export const useUserData = create(
       nombres: "",
       apellidoPaterno: "",
       apellidoMaterno: "",
+      currentCita: {
+        id: 0,
+        matricula: "",
+      },
 
       // setters
       setIsAuth: (isAuth: boolean) =>
@@ -53,6 +61,10 @@ export const useUserData = create(
       setApellidoMaterno: (apellidoMaterno: string) =>
         set(() => ({
           apellidoMaterno,
+        })),
+      setCurrentCita: (currentCita: { id: number; matricula: string }) =>
+        set(() => ({
+          currentCita,
         })),
     }),
     { name: "userData" },

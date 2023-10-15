@@ -8,7 +8,7 @@ type Props = {
 export default function Table(props: Props) {
   return (
     <div className="w-[90%] max-w-[1080px] mx-auto mt-4">
-      <ul className="bg-teal-600 text-white font-bold rounded-md justify-around py-2 text-center hidden sm:flex ">
+      <ul className="bg-teal-600 text-white font-bold rounded-md py-2 text-center hidden sm:grid grid-cols-3">
         {props.titles.map((title) => {
           return <li key={title}>{title}</li>;
         })}

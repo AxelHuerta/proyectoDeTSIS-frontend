@@ -1,5 +1,7 @@
 export type Cita = {
+  id: number;
   NumTrabajador: string;
+  matriculaAlumno: string;
   fecha: string;
   hora: string;
   motivoCita: string;
