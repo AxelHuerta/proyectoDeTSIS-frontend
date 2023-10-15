@@ -8,6 +8,7 @@ import LoginPage from "./routes/LoginPage.tsx";
 import LoginStudent from "./routes/login/LoginStudent.tsx";
 import LoginPsychiatrist from "./routes/login/LoginPsychiatrist.tsx";
 import ServicesContainer from "./routes/services/ServicesContainer.tsx";
+import Patients from "./routes/Psychiatrist/Patients.tsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/servicestest",
     element: <ServicesContainer />,
+  },
+  {
+    path: "/pacientes",
+    element: <Patients />,
   },
 ]);
 

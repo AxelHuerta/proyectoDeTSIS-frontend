@@ -8,7 +8,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserData } from "../store/Store";
 
 type menuOption = {
@@ -31,8 +31,9 @@ export default function Navbar() {
     setIsAuth,
   } = useUserData((state) => state);
 
+  const navigate = useNavigate();
+
   // TODO: psychiatrist links
-  // menu options
   const menuOptions: menuOption[] = [
     {
       text: "Inicio",
@@ -40,7 +41,7 @@ export default function Navbar() {
     },
     {
       text: `${userType == "psychiatrist" ? "Pacientes" : "Psicoeducación"}`,
-      link: "/",
+      link: `${userType == "psychiatrist" ? "/pacientes" : "/"}`,
     },
     {
       text: `${
@@ -58,6 +59,7 @@ export default function Navbar() {
     setApellidoMaterno("");
     setId("");
     setUserType("");
+    navigate("/");
   };
 
   return (
