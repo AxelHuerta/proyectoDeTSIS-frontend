@@ -47,7 +47,7 @@ export default function Navbar() {
       text: `${
         userType == "psychiatrist" ? "Calendario" : "Solicitar Servicio"
       }`,
-      link: "/services",
+      link: `${userType == "psychiatrist" ? "/citas" : "/"}`,
     },
   ];
 

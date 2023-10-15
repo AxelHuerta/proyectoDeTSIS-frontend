@@ -16,7 +16,7 @@ export default function BTableAlumno(props: Props) {
             } rounded-md py-2 sm:flex flex-col justify-around my-2`}
             key={`${alumno.nombres}${alumno.apellidoPaterno}${alumno.apellidoMaterno}`}
           >
-            <Link to={"/"} className="sm:flex justify-around">
+            <Link to={"/"} className="sm:grid sm:grid-cols-3 sm:text-center">
               <li className="grid grid-cols-2">
                 <span className="font-bold py-2 sm:hidden">Nombres</span>
                 <p className="py-2">{alumno.nombres}</p>
