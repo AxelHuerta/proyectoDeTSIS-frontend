@@ -1,10 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Card, CardBody, Heading, Text } from "@chakra-ui/react";
+import { Card, CardBody, Heading, Spinner, Text } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
 import { useUserData } from "../../store/Store";
 import { Cita } from "../../types/Cita";
 import axios from "axios";
+import { format } from "date-fns";
 
 export default function AppointmentDetails() {
   const { currentCita } = useUserData((state) => state);
@@ -54,7 +55,16 @@ export default function AppointmentDetails() {
   if (isLoading) {
     return (
       <>
-        <h1>'Ta cargando</h1>
+        <Navbar />
+        <div className="flex min-h-screen justify-center items-center">
+          <Spinner
+            thickness="4px"
+            speed="0.65s"
+            emptyColor="gray.200"
+            color="teal.500"
+            size="xl"
+          />
+        </div>
       </>
     );
   }
@@ -83,7 +93,7 @@ export default function AppointmentDetails() {
               {/* fecha */}
               <p className="grid grid-cols-2">
                 <span className="font-bold mr-4">Fecha:</span>
-                {cita?.fecha}
+                {format(new Date(cita.fecha), "dd/MM/yyyy")}
               </p>
               <p className="grid grid-cols-2">
                 {/* hora */}

@@ -14,7 +14,7 @@ function IndexPsychiatrist() {
     <div>
       <Navbar />
       <div className="pt-32 max-w-[1080px] mx-auto">
-        <h1 className="text-2xl font-bold">
+        <h1 className="text-2xl font-bold text-center">
           Portal de Servicios Psicológicos Integrados
         </h1>
         <p>

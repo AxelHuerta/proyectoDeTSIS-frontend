@@ -7,11 +7,13 @@ import BTableCita from "../../components/BTableCita";
 export default function Appointments() {
   const titles = ["ID cita", "Fecha", "Hora"];
   const [appointments, setAppointments] = useState([]);
+  const [isLoading, setIsloading] = useState(true);
 
   const getAppointments = async () => {
     await axios.get("http://localhost:8080/api/citas").then((res) => {
-      console.log(res.data);
+      console.log(res);
       setAppointments(res.data);
+      setIsloading(false);
     });
   };
 
@@ -26,7 +28,7 @@ export default function Appointments() {
         <h1 className="text-2xl font-bold text-center">Listado de citas</h1>
         <Table
           titles={titles}
-          child={<BTableCita citaList={appointments} />}
+          child={<BTableCita citaList={appointments} isLoading={isLoading} />}
         ></Table>
       </div>
     </>

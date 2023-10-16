@@ -47,7 +47,7 @@ export default function Navbar() {
       text: `${
         userType == "psychiatrist" ? "Calendario" : "Solicitar Servicio"
       }`,
-      link: `${userType == "psychiatrist" ? "/citas" : "/"}`,
+      link: `${userType == "psychiatrist" ? "/citas" : "/services"}`,
     },
   ];
 
@@ -133,9 +133,9 @@ export default function Navbar() {
             {isAuth ? (
               <MenuItem onClick={logout}>Cerrar sesión</MenuItem>
             ) : (
-              <MenuItem>
-                <Link to={`/login`}>Iniciar Sesión</Link>
-              </MenuItem>
+              <Link to={`/login`}>
+                <MenuItem>Iniciar Sesión</MenuItem>
+              </Link>
             )}
           </MenuList>
         </Menu>

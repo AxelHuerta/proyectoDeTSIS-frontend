@@ -172,6 +172,7 @@ export default function ServicesPresentational(props: Props) {
   };
 
   const createCita = async (cita: Cita) => {
+    props.setIsLoading(true);
     await axios
       .post(`http://localhost:8080/api/alumnos/${id}/citas`, cita)
       .then((res) => {
@@ -214,7 +215,6 @@ export default function ServicesPresentational(props: Props) {
   return (
     <>
       <Navbar />
-
       {props.isLoading ? (
         <div className="h-[90vh] flex justify-center items-center">
           <Spinner
