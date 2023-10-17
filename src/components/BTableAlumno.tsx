@@ -5,6 +5,7 @@ import { Spinner } from "@chakra-ui/react";
 type Props = {
   alumnosList: Alumno[];
   isLoading: boolean;
+  status: number;
 };
 
 export default function BTableAlumno(props: Props) {
@@ -55,7 +56,9 @@ export default function BTableAlumno(props: Props) {
           );
         })
       ) : (
-        <p></p>
+        <p className="text-center text-lg">
+          {props.status == 204 ? "No hay pacientes registrados" : ""}
+        </p>
       )}
     </>
   );

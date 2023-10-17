@@ -7,6 +7,7 @@ import { Spinner } from "@chakra-ui/react";
 type Props = {
   citaList: Cita[];
   isLoading: boolean;
+  status: number;
 };
 
 export default function BTableCita(props: Props) {
@@ -65,7 +66,9 @@ export default function BTableCita(props: Props) {
           );
         })
       ) : (
-        <p></p>
+        <p className="text-center text-lg">
+          {props.status == 204 ? "No hay citas registrados" : ""}
+        </p>
       )}
     </>
   );

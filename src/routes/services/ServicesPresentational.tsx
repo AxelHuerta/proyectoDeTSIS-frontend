@@ -16,6 +16,13 @@ import {
   AlertIcon,
   AlertDescription,
   CloseButton,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogCloseButton,
+  AlertDialogBody,
+  AlertDialogFooter,
+  AlertDialog,
 } from "@chakra-ui/react";
 import {
   useState,
@@ -32,23 +39,9 @@ import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import axios from "axios";
 import { format } from "date-fns";
-
-type Psiquiatra = {
-  nombres: string;
-  apellidoPaterno: string;
-  apellidoMaterno: string;
-  numTrabajador: string;
-};
-
-type Cita = {
-  NumTrabajador: string;
-  fecha: string;
-  hora: string;
-  motivoCita: string;
-  discapacidad: boolean;
-  comunidadIndigena: boolean;
-  migrante: boolean;
-};
+import React from "react";
+import { hours } from "../../content/Hours";
+import { Cita } from "../../types/Cita";
 
 type Props = {
   selected: Date | undefined;
@@ -58,7 +51,6 @@ type Props = {
     migrante: boolean;
     comunidadIndigena: boolean;
   };
-  // TODO: add type
   setIdentificationData: (identificationData: {
     discapacidad: boolean;
     migrante: boolean;
@@ -80,26 +72,24 @@ type Props = {
 };
 
 export default function ServicesPresentational(props: Props) {
-  // Alert
+  // warning alert
   const {
     isOpen: isVisible,
     onClose,
     onOpen,
   } = useDisclosure({ defaultIsOpen: false });
 
+  // Error alert
+  const {
+    isOpen: isOpenAlert,
+    onOpen: onOnpenAlert,
+    onClose: onCloseAlert,
+  } = useDisclosure();
+
+  const cancelRef = React.useRef<HTMLButtonElement | null>(null);
+
   // localhost
   const { isAuth, id } = useUserData((state) => state);
-
-  // time options
-  const hours = [
-    "9:00 am",
-    "10:00 am",
-    "11:00 am",
-    "12:00 pm",
-    "1:00 pm",
-    "2:00 pm",
-    "3:00 pm",
-  ];
 
   // psiquiatras list
   const [psiquiatras, setPsiquiatras] = useState<Psiquiatra[]>([]);
@@ -158,6 +148,8 @@ export default function ServicesPresentational(props: Props) {
     onClose();
 
     let newCita: Cita = {
+      id: 0,
+      matriculaAlumno: "",
       NumTrabajador: props.psiquiatra,
       fecha: format(props.selected ? props.selected : new Date(), "dd/MM/yyyy"),
       hora: props.timeForm,
@@ -179,7 +171,22 @@ export default function ServicesPresentational(props: Props) {
         console.log(res);
         setAddCitaSuccess(true);
       })
-      .catch((e: any) => console.log("Hubo un error al agendar la cita", e));
+      .catch((e: any) => {
+        console.log("Hubo un error al agendar la cita", e);
+        onOnpenAlert();
+        resetForm();
+      });
+  };
+
+  // clean form
+  const resetForm = () => {
+    props.setIsLoading(false);
+    props.termsForm.truthful = false;
+    props.termsForm.shareData = false;
+    props.timeForm = "";
+    props.motivoCitaForm = "";
+    props.psiquiatra = "";
+    props.selected = new Date();
   };
 
   if (!isAuth) {
@@ -215,6 +222,26 @@ export default function ServicesPresentational(props: Props) {
   return (
     <>
       <Navbar />
+      <AlertDialog
+        motionPreset="slideInBottom"
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isOpen={isOpenAlert}
+        isCentered
+      >
+        <AlertDialogOverlay />
+
+        <AlertDialogContent>
+          <AlertDialogHeader>No se pudo registrar la cita</AlertDialogHeader>
+          <AlertDialogCloseButton onClick={onCloseAlert} />
+          <AlertDialogBody>Intenta más tarde</AlertDialogBody>
+          <AlertDialogFooter>
+            <Button colorScheme="red" ml={3}>
+              Aceptar
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
       {props.isLoading ? (
         <div className="h-[90vh] flex justify-center items-center">
           <Spinner
@@ -226,8 +253,8 @@ export default function ServicesPresentational(props: Props) {
           />
         </div>
       ) : (
-        <div>
-          <div className="mt-28 text-center mx-4">
+        <div className="bg-[#f0f7f7]">
+          <div className="pt-28 text-center mx-4">
             <h1 className="text-2xl font-bold">Solicitar Cita</h1>
             <span>La atención psícologica es completamente gratuita</span>
           </div>
@@ -271,26 +298,34 @@ export default function ServicesPresentational(props: Props) {
                   className="mt-8 flex flex-col"
                   onChange={props.dateTimeFormOnChange}
                 >
-                  {/* date */}
-                  <DayPicker
-                    mode="single"
-                    selected={props.selected}
-                    onSelect={props.setSelected}
-                  />
-                  {/* hour */}
-                  <Select
-                    placeholder="Selecciona una hora"
-                    id="time"
-                    name="time"
-                  >
-                    {hours.map((hour) => {
-                      return (
-                        <option value={hour} key={hour}>
-                          {hour}
-                        </option>
-                      );
-                    })}
-                  </Select>
+                  <div className="grid md:grid-cols-2">
+                    {/* date */}
+                    <div>
+                      <label className="font-bold">Fecha</label>
+                      <DayPicker
+                        mode="single"
+                        selected={props.selected}
+                        onSelect={props.setSelected}
+                      />
+                    </div>
+                    {/* hour */}
+                    <div>
+                      <label className="font-bold">Hora</label>
+                      <Select
+                        placeholder="Selecciona una hora"
+                        id="time"
+                        name="time"
+                      >
+                        {hours.map((hour) => {
+                          return (
+                            <option value={hour} key={hour}>
+                              {hour}
+                            </option>
+                          );
+                        })}
+                      </Select>
+                    </div>
+                  </div>
                 </FormControl>
               </CardBody>
             </Card>
@@ -347,7 +382,7 @@ export default function ServicesPresentational(props: Props) {
               </CardBody>
             </Card>
 
-            {/* terminos y servicios */}
+            {/* terms and services */}
             <Card className="my-4">
               <CardBody>
                 <Text>
@@ -384,7 +419,8 @@ export default function ServicesPresentational(props: Props) {
                 </FormControl>
               </CardBody>
             </Card>
-            <div className="text-center my-5">
+            <div className="text-center pt-5 pb-12">
+              {/* warning alert */}
               {isVisible ? (
                 <Alert status="warning">
                   <AlertIcon />
@@ -403,6 +439,7 @@ export default function ServicesPresentational(props: Props) {
                   />
                 </Alert>
               ) : null}
+              {/* submit button */}
               <Button colorScheme="teal" onClick={handleForm}>
                 Registar solicitud
               </Button>
