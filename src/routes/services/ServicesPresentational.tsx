@@ -41,7 +41,7 @@ import axios from "axios";
 import { format } from "date-fns";
 import React from "react";
 import { hours } from "../../content/Hours";
-import { Cita } from "../../types/Cita";
+import { CitaDTO } from "../../types/Cita";
 
 type Props = {
   selected: Date | undefined;
@@ -94,6 +94,7 @@ export default function ServicesPresentational(props: Props) {
   // psiquiatras list
   const [psiquiatras, setPsiquiatras] = useState<Psiquiatra[]>([]);
   const [addCitaSuccess, setAddCitaSuccess] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("Intenta más tarde");
 
   const getPsiquiatras = async () => {
     await axios
@@ -147,9 +148,7 @@ export default function ServicesPresentational(props: Props) {
     // close alert
     onClose();
 
-    let newCita: Cita = {
-      id: 0,
-      matriculaAlumno: "",
+    let newCita: CitaDTO = {
       NumTrabajador: props.psiquiatra,
       fecha: format(props.selected ? props.selected : new Date(), "dd/MM/yyyy"),
       hora: props.timeForm,
@@ -163,7 +162,7 @@ export default function ServicesPresentational(props: Props) {
     createCita(newCita);
   };
 
-  const createCita = async (cita: Cita) => {
+  const createCita = async (cita: CitaDTO) => {
     props.setIsLoading(true);
     await axios
       .post(`http://localhost:8080/api/alumnos/${id}/citas`, cita)
@@ -172,7 +171,11 @@ export default function ServicesPresentational(props: Props) {
         setAddCitaSuccess(true);
       })
       .catch((e: any) => {
-        console.log("Hubo un error al agendar la cita", e);
+        console.log(
+          "Hubo un error al agendar la cita",
+          e.response.data.description,
+        );
+        setErrorMessage(e.response.data.description);
         onOnpenAlert();
         resetForm();
       });
@@ -225,7 +228,7 @@ export default function ServicesPresentational(props: Props) {
       <AlertDialog
         motionPreset="slideInBottom"
         leastDestructiveRef={cancelRef}
-        onClose={onClose}
+        onClose={onCloseAlert}
         isOpen={isOpenAlert}
         isCentered
       >
@@ -234,9 +237,9 @@ export default function ServicesPresentational(props: Props) {
         <AlertDialogContent>
           <AlertDialogHeader>No se pudo registrar la cita</AlertDialogHeader>
           <AlertDialogCloseButton onClick={onCloseAlert} />
-          <AlertDialogBody>Intenta más tarde</AlertDialogBody>
+          <AlertDialogBody>{errorMessage}</AlertDialogBody>
           <AlertDialogFooter>
-            <Button colorScheme="red" ml={3}>
+            <Button colorScheme="red" ml={3} onClick={onCloseAlert}>
               Aceptar
             </Button>
           </AlertDialogFooter>
@@ -346,6 +349,7 @@ export default function ServicesPresentational(props: Props) {
                     id="motivoCita"
                     name="motivoCita"
                     style={{ height: "300px" }}
+                    maxLength={255}
                   />
                 </FormControl>
               </CardBody>

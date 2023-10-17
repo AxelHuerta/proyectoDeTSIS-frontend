@@ -9,3 +9,13 @@ export type Cita = {
   comunidadIndigena: boolean;
   migrante: boolean;
 };
+
+export type CitaDTO = {
+  NumTrabajador: string;
+  fecha: string;
+  hora: string;
+  motivoCita: string;
+  discapacidad: boolean;
+  comunidadIndigena: boolean;
+  migrante: boolean;
+};

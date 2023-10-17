@@ -70,9 +70,9 @@ export default function AppointmentDetails() {
   }
 
   return (
-    <>
+    <div className="bg-[#f0f7f7] min-h-screen">
       <Navbar />
-      <div className="mt-28 max-w-[1080px] mx-auto">
+      <div className="pt-28 max-w-[1080px] mx-auto">
         <h1 className="text-2xl font-bold text-center">Detalles de la cita</h1>
         <Card className="my-4">
           <CardBody>
@@ -149,6 +149,6 @@ export default function AppointmentDetails() {
           </CardBody>
         </Card>
       </div>
-    </>
+    </div>
   );
 }

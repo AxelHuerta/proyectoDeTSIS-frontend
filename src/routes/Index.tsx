@@ -18,7 +18,7 @@ export default function Index() {
       {/* slider */}
       <Carousel />
       {/* infografias */}
-      <div className="mx-0 md:mx-10 my-40">
+      <div className="mx-0 md:px-10 py-40 bg-[#f0f7f7]">
         <h1 className="text-2xl uppercase font-bold text-center">
           Infografías
         </h1>
