@@ -125,9 +125,12 @@ export default function LoginInput(props: Props) {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center mx-6 md:mx-14 lg:mx-30">
+      <div className="flex flex-col justify-center items-center mx-6 md:mx-14 lg:mx-30 bg-base-100">
         <h2 className="text-2xl font-bold">Iniciar Sesión</h2>
-        <FormControl onChange={formOnChange}>
+        <FormControl
+          onChange={formOnChange}
+          className="card flex-shrink-0 w-full max-w-sm shadow-2xl p-5"
+        >
           <Input
             id="id"
             placeholder={`${

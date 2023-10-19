@@ -196,15 +196,20 @@ export default function ServicesPresentational(props: Props) {
     return (
       <>
         <Navbar />
-        <div className="mt-28 text-center mx-4">
-          <h1 className="text-2xl font-bold">Solicitar Cita</h1>
-          <span>Para poder solicitar cita debes iniciar sesión</span>
-          <br />
-          <Link to="/login/student">
-            <Button colorScheme="teal" className="text-center mt-4">
-              Inciar Sesión
-            </Button>
-          </Link>
+        <div className="hero min-h-screen bg-base-200">
+          <div className="hero-content text-center">
+            <div className="max-w-md">
+              <h1 className="text-4xl font-bold">Solicitar cita</h1>
+              <p className="py-6">
+                Para poder solicitar una cita debes de iniciar sesión
+              </p>
+              <Link to="/login/student">
+                <button className="btn hover:bg-teal-700 bg-teal-800 text-white">
+                  Iniciar Sesión
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       </>
     );
@@ -212,19 +217,26 @@ export default function ServicesPresentational(props: Props) {
 
   if (addCitaSuccess) {
     return (
-      <div className="flex min-h-screen justify-center items-center flex-col">
-        <h1 className="text-2xl">Tu cita ha sido creada con exito</h1>
-        <Link to={"/"}>
-          <Button colorScheme="teal" className="mt-4">
-            Volver al inicio
-          </Button>
-        </Link>
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="text-4xl font-bold mb-4">
+              Tu cita se ha creado con éxito
+            </h1>
+            <Link to="/">
+              <button className="btn hover:bg-teal-700 bg-teal-800 text-white">
+                Volver al inicio
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
   return (
     <>
       <Navbar />
+      {/* error alert */}
       <AlertDialog
         motionPreset="slideInBottom"
         leastDestructiveRef={cancelRef}
@@ -245,6 +257,7 @@ export default function ServicesPresentational(props: Props) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+      {/* is loading */}
       {props.isLoading ? (
         <div className="h-[90vh] flex justify-center items-center">
           <Spinner
@@ -349,7 +362,7 @@ export default function ServicesPresentational(props: Props) {
                     id="motivoCita"
                     name="motivoCita"
                     style={{ height: "300px" }}
-                    maxLength={255}
+                    maxLength={344}
                   />
                 </FormControl>
               </CardBody>

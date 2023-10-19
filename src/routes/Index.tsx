@@ -1,15 +1,7 @@
 import Navbar from "../components/Navbar";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Text,
-  Heading,
-  Button,
-  Image,
-} from "@chakra-ui/react";
+import { Button, Image } from "@chakra-ui/react";
 import Carousel from "../components/Carousel";
+import Infographic from "../components/Infographic";
 
 export default function Index() {
   return (
@@ -23,59 +15,14 @@ export default function Index() {
           Infografías
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 m-10">
-          <Card>
-            <CardHeader>
-              <Heading size="md">Lorem ipsum</Heading>
-            </CardHeader>
-            <CardBody>
-              <Text>
-                Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
-                sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit
-                amet, qui minim labore adipisicing minim sint cillum sint
-                consectetur cupidatat.
-              </Text>
-            </CardBody>
-            <CardFooter>
-              <Button>Consultar información</Button>
-            </CardFooter>
-          </Card>
-          <Card>
-            <CardHeader>
-              <Heading size="md">Dolor sit amet</Heading>
-            </CardHeader>
-            <CardBody>
-              <Text>
-                Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
-                sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit
-                amet, qui minim labore adipisicing minim sint cillum sint
-                consectetur cupidatat.
-              </Text>
-            </CardBody>
-            <CardFooter>
-              <Button>Consultar información</Button>
-            </CardFooter>
-          </Card>
-          <Card>
-            <CardHeader>
-              <Heading size="md">Qui minim labore</Heading>
-            </CardHeader>
-            <CardBody>
-              <Text>
-                Lorem ipsum dolor sit amet, qui minim labore adipisicing minim
-                sint cillum sint consectetur cupidatat. Lorem ipsum dolor sit
-                amet, qui minim labore adipisicing minim sint cillum sint
-                consectetur cupidatat.
-              </Text>
-            </CardBody>
-            <CardFooter>
-              <Button>Consultar información</Button>
-            </CardFooter>
-          </Card>
+          <Infographic />
+          <Infographic />
+          <Infographic />
         </div>
       </div>
 
-      {/* el otro */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-gray-300 p-20">
+      {/* atencion clinica */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 bg-gray-300 p-20">
         <div className="m-auto">
           <h2 className="text-2xl font-bold mb-5">Atención Clínica</h2>
           <p className="mb-5">
@@ -86,10 +33,10 @@ export default function Index() {
           </p>
           <Button>Consultar información</Button>
         </div>
-        <div className="flex justify-center">
+        <div className="hidden lg:flex justify-center">
           <Image
             src="https://images.pexels.com/photos/6712704/pexels-photo-6712704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-            className="hidden md:block"
+            className="hidden md:block max-w-lg"
           />
         </div>
       </div>

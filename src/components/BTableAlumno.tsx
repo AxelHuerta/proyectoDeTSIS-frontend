@@ -29,10 +29,8 @@ export default function BTableAlumno(props: Props) {
         props.alumnosList.map((alumno, index) => {
           return (
             <ul
-              className={`${
-                index % 2 == 0 ? "bg-teal-50" : "bg-teal-100"
-              } rounded-md py-2 sm:flex flex-col justify-around my-2`}
-              key={`${alumno.nombres}${alumno.apellidoPaterno}${alumno.apellidoMaterno}`}
+              className={`sm:flex flex-col justify-around border-b`}
+              key={index}
             >
               <Link to={"/"} className="sm:grid sm:grid-cols-3 sm:text-center">
                 <li className="grid grid-cols-2 sm:block">

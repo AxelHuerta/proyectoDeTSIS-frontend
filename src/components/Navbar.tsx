@@ -63,7 +63,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-teal-500 flex justify-between p-5 top-0 fixed w-full z-50">
+    <nav className="bg-teal-900 flex justify-between p-5 top-0 fixed w-full z-50">
       <span className="font-bold text-xl flex items-center text-white">
         Departamento de Psiquiatría
       </span>

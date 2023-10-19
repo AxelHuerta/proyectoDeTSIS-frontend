@@ -8,7 +8,7 @@ type Props = {
 
 export default function InputSwitch(props: Props) {
   return (
-    <div className="flex justify-between md:justify-normal w-full my-4">
+    <div className="flex justify-between  w-full my-4 px-4">
       <FormLabel htmlFor={props.name} mb="0">
         {props.text}
       </FormLabel>

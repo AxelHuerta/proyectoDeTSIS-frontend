@@ -1,29 +1,26 @@
 import Navbar from "../components/Navbar";
-import { Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 export default function LoginPage() {
+  const btnStyles = "btn hover:bg-teal-700 bg-teal-800 text-white mx-2";
+
   return (
     <>
       <Navbar />
-      <div>
-        <h2 className="pt-52 text-2xl font-bold text-center">
-          Bienvenida y bienvenido al sistema de Servicios Psicológicos
-        </h2>
-        <h3 className="text-xl font-bold text-center">
-          Ingrese según su perfil
-        </h3>
-        <div className="text-center m-5">
-          <Link to={"/login/student"}>
-            <Button colorScheme="teal" variant="outline" className="m-5">
-              Alumno
-            </Button>
-          </Link>
-          <Link to={"/login/psychiatrist"}>
-            <Button colorScheme="teal" variant="outline" className="m-5">
-              Psiquiatra
-            </Button>
-          </Link>
+      <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="text-4xl font-bold">
+              Bienvenida y bienvenido al sistema de Servicios Psicológicos
+            </h1>
+            <p className="py-6">Ingrese según su perfil</p>
+            <Link to="/login/student">
+              <button className={btnStyles}>Alumno</button>
+            </Link>
+            <Link to="/login/psychiatrist">
+              <button className={btnStyles}>Psiquiatra</button>
+            </Link>
+          </div>
         </div>
       </div>
     </>

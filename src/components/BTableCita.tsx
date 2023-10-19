@@ -34,12 +34,10 @@ export default function BTableCita(props: Props) {
   return (
     <>
       {props.citaList.length > 0 ? (
-        props.citaList.map((cita, index) => {
+        props.citaList.map((cita) => {
           return (
             <ul
-              className={`${
-                index % 2 == 0 ? "bg-teal-50" : "bg-teal-100"
-              } rounded-md py-2 sm:flex flex-col justify-around my-2`}
+              className={"sm:flex flex-col justify-around border-b"}
               key={cita.id}
             >
               <Link
@@ -59,7 +57,7 @@ export default function BTableCita(props: Props) {
                 </li>
                 <li className="grid grid-cols-2 sm:block">
                   <span className="font-bold py-2 sm:hidden">Hora</span>
-                  <p className="py-2">{cita.hora}</p>
+                  <p className="py-2">{cita.hora.slice(0, -3)}</p>
                 </li>
               </Link>
             </ul>
@@ -67,7 +65,7 @@ export default function BTableCita(props: Props) {
         })
       ) : (
         <p className="text-center text-lg">
-          {props.status == 204 ? "No hay citas registrados" : ""}
+          {props.status == 204 ? "No hay citas registradas" : ""}
         </p>
       )}
     </>
