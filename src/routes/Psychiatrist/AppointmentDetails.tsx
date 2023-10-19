@@ -1,6 +1,17 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { Card, CardBody, Heading, Spinner, Text } from "@chakra-ui/react";
+import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  Spinner,
+  Button,
+  useDisclosure,
+} from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
 import { useUserData } from "../../store/Store";
 import { Cita } from "../../types/Cita";
@@ -25,7 +36,14 @@ export default function AppointmentDetails() {
 
   const { citaId } = useParams();
 
+  // p css styles
   const pStyles = "flex justify-between md:grid md:grid-cols-2 my-4 border-b";
+
+  // alert variables
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const cancelRef = React.useRef<HTMLButtonElement | null>(null);
+
+  const navigate = useNavigate();
 
   const handleCita = async () => {
     await axios
@@ -48,6 +66,20 @@ export default function AppointmentDetails() {
         setIsLoading(false);
       })
       .catch((error) => console.log(error));
+  };
+
+  const handleDeleteCita = async () => {
+    await axios
+      .delete(
+        `http://localhost:8080/api/alumnos/${currentCita.matricula}/citas/${currentCita.id}`,
+      )
+      .then((res) => {
+        console.log(res);
+        navigate("/citas");
+      })
+      .catch((error) =>
+        console.log("Hubo un error al eliminar la cita", error),
+      );
   };
 
   useEffect(() => {
@@ -74,11 +106,38 @@ export default function AppointmentDetails() {
   return (
     <div className="bg-base-200 min-h-screen">
       <Navbar />
-      <div className="pt-28 max-w-[1080px] mx-auto">
+
+      {/* datos generales */}
+      <AlertDialog
+        motionPreset="slideInBottom"
+        leastDestructiveRef={cancelRef}
+        onClose={onClose}
+        isOpen={isOpen}
+        isCentered
+      >
+        <AlertDialogOverlay />
+
+        <AlertDialogContent>
+          <AlertDialogHeader>¿Desea borrar esta cita?</AlertDialogHeader>
+          <AlertDialogCloseButton />
+          <AlertDialogBody>
+            Una vez la cita sea eliminada, no podrá recuperarse.
+          </AlertDialogBody>
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose}>
+              No
+            </Button>
+            <Button colorScheme="red" ml={3} onClick={handleDeleteCita}>
+              Eliminar cita
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+      <div className="pt-28 pb-12 max-w-[1080px] mx-auto">
         <h1 className="text-2xl font-bold text-center">Detalles de la cita</h1>
 
         {/* datos generales */}
-        <div className="card max-w[1080px] bg-base-100 shadow-xl m-4">
+        <div className="card bg-base-100 shadow-xl m-4">
           <div className="card-body">
             <h2 className="card-title">Datos generales</h2>
             <div>
@@ -112,7 +171,7 @@ export default function AppointmentDetails() {
         </div>
 
         {/* identifiación */}
-        <div className="card max-w[1080px] bg-base-100 shadow-xl m-4">
+        <div className="card bg-base-100 shadow-xl m-4">
           <div className="card-body">
             <h2 className="card-title">
               ¿Se identificó con algunos de los grupos?
@@ -142,12 +201,38 @@ export default function AppointmentDetails() {
         </div>
 
         {/* motivo de la cita */}
-        <div className="card max-w[1080px] bg-base-100 shadow-xl m-4">
+        <div className="card bg-base-100 shadow-xl m-4">
           <div className="card-body">
             <h2 className="card-title">Motivo de la cita</h2>
             <div>
               <p>{cita.motivoCita}</p>
             </div>
+          </div>
+        </div>
+
+        {/* danger zone */}
+        <div className="alert bg-white m-auto">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            className="stroke-info shrink-0 w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            ></path>
+          </svg>
+          <span>¿Borrar cita?</span>
+          <div>
+            <button
+              className="btn btn-sm bg-red-500 hover:bg-red-400 text-white"
+              onClick={onOpen}
+            >
+              Borrar
+            </button>
           </div>
         </div>
       </div>
