@@ -25,6 +25,8 @@ export default function AppointmentDetails() {
 
   const { citaId } = useParams();
 
+  const pStyles = "flex justify-between md:grid md:grid-cols-2 my-4 border-b";
+
   const handleCita = async () => {
     await axios
       .get(
@@ -70,84 +72,84 @@ export default function AppointmentDetails() {
   }
 
   return (
-    <div className="bg-[#f0f7f7] min-h-screen">
+    <div className="bg-base-200 min-h-screen">
       <Navbar />
       <div className="pt-28 max-w-[1080px] mx-auto">
         <h1 className="text-2xl font-bold text-center">Detalles de la cita</h1>
-        <Card className="my-4">
-          <CardBody>
-            <Heading size="md" className="text-center my-4">
-              Datos generales
-            </Heading>
+
+        {/* datos generales */}
+        <div className="card max-w[1080px] bg-base-100 shadow-xl m-4">
+          <div className="card-body">
+            <h2 className="card-title">Datos generales</h2>
             <div>
               {/* id cita */}
-              <p className="grid grid-cols-2">
-                <span className="font-bold mr-4">ID cita:</span>
+              <p className={pStyles}>
+                <span className="font-bold">ID cita:</span>
                 {citaId}
               </p>
               {/* matricula */}
-              <p className="grid grid-cols-2">
-                <span className="font-bold mr-4">Matrícula:</span>
+              <p className={pStyles}>
+                <span className="font-bold">Matrícula:</span>
                 {currentCita.matricula}
               </p>
               {/* fecha */}
-              <p className="grid grid-cols-2">
-                <span className="font-bold mr-4">Fecha:</span>
+              <p className={pStyles}>
+                <span className="font-bold">Fecha:</span>
                 {format(new Date(cita.fecha), "dd/MM/yyyy")}
               </p>
-              <p className="grid grid-cols-2">
+              <p className={pStyles}>
                 {/* hora */}
-                <span className="font-bold mr-4">Hora:</span>
-                {cita?.hora}
+                <span className="font-bold">Hora:</span>
+                {cita?.hora.slice(0, -3)}
               </p>
               {/* numTrabajador */}
-              <p className="grid grid-cols-2">
-                <span className="font-bold mr-4">ID psiquiatra:</span>
+              <p className={pStyles}>
+                <span className="font-bold">ID psiquiatra:</span>
                 {cita?.NumTrabajador}
               </p>
             </div>
-          </CardBody>
-        </Card>
+          </div>
+        </div>
 
         {/* identifiación */}
-        <Card className="my-4">
-          <CardBody>
-            <Heading size="md" className="text-center my-4">
+        <div className="card max-w[1080px] bg-base-100 shadow-xl m-4">
+          <div className="card-body">
+            <h2 className="card-title">
               ¿Se identificó con algunos de los grupos?
-            </Heading>
+            </h2>
             <div>
               {/* discapacidad */}
-              <p className="grid grid-cols-2">
+              <p className={pStyles}>
                 <span className="font-bold mr-4">
                   Persona con discapacidad:
                 </span>
                 {cita.discapacidad ? "Sí" : "No"}
               </p>
               {/* migrante */}
-              <p className="grid grid-cols-2">
+              <p className={pStyles}>
                 <span className="font-bold mr-4">Persona migrante:</span>
                 {cita.migrante ? "Sí" : "No"}
               </p>
               {/* comunidades indigenas */}
-              <p className="grid grid-cols-2">
+              <p className={pStyles}>
                 <span className="font-bold mr-4">
                   Pueblos y comunidades indígenas:
                 </span>
                 {cita.comunidadIndigena ? "Sí" : "No"}
               </p>
             </div>
-          </CardBody>
-        </Card>
+          </div>
+        </div>
 
         {/* motivo de la cita */}
-        <Card className="my-4">
-          <CardBody>
-            <Heading size="md" className="text-center my-4">
-              Motivo de la cita
-            </Heading>
-            <Text>{cita.motivoCita}</Text>
-          </CardBody>
-        </Card>
+        <div className="card max-w[1080px] bg-base-100 shadow-xl m-4">
+          <div className="card-body">
+            <h2 className="card-title">Motivo de la cita</h2>
+            <div>
+              <p>{cita.motivoCita}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
