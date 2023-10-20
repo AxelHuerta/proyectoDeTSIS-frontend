@@ -362,7 +362,7 @@ export default function ServicesPresentational(props: Props) {
                     id="motivoCita"
                     name="motivoCita"
                     style={{ height: "300px" }}
-                    maxLength={344}
+                    maxLength={255}
                   />
                 </FormControl>
               </CardBody>

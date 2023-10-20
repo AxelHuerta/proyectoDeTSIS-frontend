@@ -32,7 +32,10 @@ export default function BTableAlumno(props: Props) {
               className={`sm:flex flex-col justify-around border-b`}
               key={index}
             >
-              <Link to={"/"} className="sm:grid sm:grid-cols-3 sm:text-center">
+              <Link
+                to={`/patients/${alumno.matricula}`}
+                className="sm:grid sm:grid-cols-3 sm:text-center"
+              >
                 <li className="grid grid-cols-2 sm:block">
                   <span className="font-bold py-2 sm:hidden">Nombres</span>
                   <p className="py-2">{alumno.nombres}</p>

@@ -7,6 +7,7 @@ import {
   Button,
   Text,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 export default function Infographic() {
   return (
@@ -29,7 +30,9 @@ export default function Infographic() {
         </Text>
       </CardBody>
       <CardFooter>
-        <Button>Consultar información</Button>
+        <Link to={"/article1"}>
+          <Button>Consultar información</Button>
+        </Link>
       </CardFooter>
     </Card>
   );

@@ -9,6 +9,7 @@ type State = {
   apellidoPaterno: string;
   apellidoMaterno: string;
   currentCita: { id: number; matricula: string };
+  currentPatient: { matricula: string };
 };
 
 type Actions = {
@@ -21,6 +22,7 @@ type Actions = {
   setApellidoMaterno: (apellidoPaterno: string) => void;
   // appointment
   setCurrentCita: (currentCita: { id: number; matricula: string }) => void;
+  setCurrentPatient: (currentPatient: { matricula: string }) => void;
 };
 
 export const useUserData = create(
@@ -36,6 +38,7 @@ export const useUserData = create(
         id: 0,
         matricula: "",
       },
+      currentPatient: { matricula: "" },
 
       // setters
       setIsAuth: (isAuth: boolean) =>
@@ -65,6 +68,10 @@ export const useUserData = create(
       setCurrentCita: (currentCita: { id: number; matricula: string }) =>
         set(() => ({
           currentCita,
+        })),
+      setCurrentPatient: (currentPatient: { matricula: string }) =>
+        set(() => ({
+          currentPatient,
         })),
     }),
     { name: "userData" },

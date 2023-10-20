@@ -11,6 +11,8 @@ import ServicesContainer from "./routes/services/ServicesContainer.tsx";
 import Patients from "./routes/Psychiatrist/Patients.tsx";
 import Appointments from "./routes/Psychiatrist/Appointments.tsx";
 import AppointmentDetails from "./routes/Psychiatrist/AppointmentDetails.tsx";
+import Article1 from "./routes/articles/article1.tsx";
+import PatientDetails from "./routes/Psychiatrist/PatientDetails.tsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +50,14 @@ const router = createBrowserRouter([
   {
     path: "/citas/:citaId",
     element: <AppointmentDetails />,
+  },
+  {
+    path: "/patients/:patientId",
+    element: <PatientDetails />,
+  },
+  {
+    path: "/article1",
+    element: <Article1 />,
   },
 ]);
 
