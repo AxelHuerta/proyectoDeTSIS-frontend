@@ -5,6 +5,10 @@ type Props = {
   text: string;
 };
 
+/**
+ * pagina de carga
+ * @component
+ */
 export default function Loading(props: Props) {
   return (
     <>

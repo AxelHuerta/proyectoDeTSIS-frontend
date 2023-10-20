@@ -1,6 +1,10 @@
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 
+/**
+ * muestra la pagina de acceso al login dependiendo de si el usuario es alumno o psiquiatra
+ * @component
+ */
 export default function LoginPage() {
   const btnStyles = "btn hover:bg-teal-700 bg-teal-800 text-white mx-2";
 

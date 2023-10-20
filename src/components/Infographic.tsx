@@ -9,12 +9,18 @@ import {
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
+/**
+ * genera una infografia
+ * @component
+ */
 export default function Infographic() {
   return (
     <Card>
       <CardHeader>
+        {/* titulo */}
         <Heading size="md">Lorem ipsum</Heading>
       </CardHeader>
+      {/* cuerpo */}
       <CardBody>
         <Text className="mb-5">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -30,6 +36,7 @@ export default function Infographic() {
         </Text>
       </CardBody>
       <CardFooter>
+        {/* link a la infografia */}
         <Link to={"/article1"}>
           <Button>Consultar información</Button>
         </Link>

@@ -1,5 +1,9 @@
 import Navbar from "../../components/Navbar";
 
+/**
+ * articulo de ejemplo
+ * @component
+ */
 export default function Article1() {
   return (
     <div className="bg-base-200">

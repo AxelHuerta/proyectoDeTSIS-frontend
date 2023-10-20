@@ -3,6 +3,10 @@ import { Button, Image } from "@chakra-ui/react";
 import Carousel from "../components/Carousel";
 import Infographic from "../components/Infographic";
 
+/**
+ * muestra el index
+ * @component
+ */
 export default function Index() {
   return (
     <>

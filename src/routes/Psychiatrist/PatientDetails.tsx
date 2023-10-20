@@ -5,7 +5,12 @@ import Navbar from "../../components/Navbar";
 import axios from "axios";
 import { Alumno } from "../../types/Alumno";
 
+/**
+ * muestra los detalles de un paciente
+ * @component
+ */
 export default function PatientDetails() {
+  // datos del paciente
   const [patient, setPatient] = useState<Alumno>({
     matricula: "",
     nombres: "",
@@ -15,13 +20,18 @@ export default function PatientDetails() {
     genero: "",
     telefonoMovil: "",
   });
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // id del paciente en la url
   const { patientId } = useParams();
 
-  // p css styles
+  // estilos de los parrafos
   const pStyles = "flex justify-between md:grid md:grid-cols-2 my-4 border-b";
 
+  /**
+   * hace la peticion get de un paciente
+   */
   const handlePatient = async () => {
     await axios
       .get(`http://localhost:8080/api/alumnos/${patientId}`)

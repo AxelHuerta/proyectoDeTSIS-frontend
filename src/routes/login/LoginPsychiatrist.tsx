@@ -1,6 +1,10 @@
 import Navbar from "../../components/Navbar";
 import LoginInput from "../../components/LoginInput";
 
+/**
+ * inicio de sesión del psiquiatra
+ * @component
+ */
 export default function LoginPsychiatrist() {
   // side image link
   const imageLink =

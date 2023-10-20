@@ -71,6 +71,10 @@ type Props = {
   setAlertMessagge: Dispatch<SetStateAction<{ title: string; text: string }>>;
 };
 
+/**
+ * muestra la pagina de agendado de cita
+ * @component
+ */
 export default function ServicesPresentational(props: Props) {
   // warning alert
   const {
@@ -85,17 +89,19 @@ export default function ServicesPresentational(props: Props) {
     onOpen: onOnpenAlert,
     onClose: onCloseAlert,
   } = useDisclosure();
-
   const cancelRef = React.useRef<HTMLButtonElement | null>(null);
 
   // localhost
   const { isAuth, id } = useUserData((state) => state);
 
-  // psiquiatras list
+  // lista psiquiatras
   const [psiquiatras, setPsiquiatras] = useState<Psiquiatra[]>([]);
   const [addCitaSuccess, setAddCitaSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("Intenta más tarde");
 
+  /**
+   * hace la peticion get de todos los psiquiatras
+   */
   const getPsiquiatras = async () => {
     await axios
       .get("http://localhost:8080/api/psiquiatras")
@@ -114,7 +120,9 @@ export default function ServicesPresentational(props: Props) {
     getPsiquiatras();
   }, []);
 
-  // TODO:
+  /**
+   * hace las validaciones de los datos del formulario
+   */
   const handleForm = () => {
     if (
       !props.termsForm.truthful ||
@@ -162,6 +170,9 @@ export default function ServicesPresentational(props: Props) {
     createCita(newCita);
   };
 
+  /**
+   * hace la peticion post de la cita
+   */
   const createCita = async (cita: CitaDTO) => {
     props.setIsLoading(true);
     await axios
@@ -181,7 +192,9 @@ export default function ServicesPresentational(props: Props) {
       });
   };
 
-  // clean form
+  /**
+   * reseta el formulario
+   */
   const resetForm = () => {
     props.setIsLoading(false);
     props.termsForm.truthful = false;

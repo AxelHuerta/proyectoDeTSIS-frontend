@@ -1,6 +1,10 @@
 import Navbar from "../../components/Navbar";
 import LoginInput from "../../components/LoginInput";
 
+/**
+ * inicio de sesión del alumno
+ * @component
+ */
 export default function LoginStudent() {
   // side image link
   const imageLink =

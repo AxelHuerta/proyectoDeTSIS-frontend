@@ -18,19 +18,22 @@ type Props = {
   loginType: string;
 };
 
+/**
+ * componente para el inicio de sesion
+ * @component
+ */
 export default function LoginInput(props: Props) {
-  // password visibility
+  // visibilidad del password
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
 
-  // form info
+  // datos del input
   const [formData, setFormData] = useState({
-    // TODO: numero trabajador o matrícula
-    id: "",
+    id: "", // matricula o numero de trabajador
     password: "",
   });
 
-  // form error: empty inputs
+  // mensajes de error sobre los inputs
   const [errorMesagge, setErrorMesagge] = useState("");
   const [showErrorMesagge, setShowErrorMesagge] = useState(false);
 
@@ -47,7 +50,9 @@ export default function LoginInput(props: Props) {
   // link to main page
   const navigate = useNavigate();
 
-  // login user
+  /**
+   * realiza el inicio de sesion
+   */
   const login = async () => {
     axios
       // mocklab
@@ -83,13 +88,14 @@ export default function LoginInput(props: Props) {
         setUserType(props.loginType);
         navigate("/");
       })
-      // TODO: Manejar bien el error
       .catch((error) => {
         handlerErrorCodes(error.response.status);
       });
   };
 
-  // handler http error codes
+  /**
+   * manejar codigos d error
+   */
   const handlerErrorCodes = async (error: number) => {
     // HTTP code 404
     if (error == 404) {
@@ -108,7 +114,9 @@ export default function LoginInput(props: Props) {
     }
   };
 
-  // click on 'Inciar Sesión'
+  /**
+   * tomar los datos del formulario
+   */
   const formOnClick = () => {
     if (formData.id == "" || formData.password == "") {
       setErrorMesagge("Los campos no deben de estar vacíos");
@@ -118,7 +126,9 @@ export default function LoginInput(props: Props) {
     login();
   };
 
-  // save input data
+  /**
+   * guardar cambios del formulario
+   */
   const formOnChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -126,11 +136,13 @@ export default function LoginInput(props: Props) {
   return (
     <>
       <div className="flex flex-col justify-center items-center mx-6 md:mx-14 lg:mx-30 bg-base-100">
+        {/* titulo */}
         <h2 className="text-2xl font-bold">Iniciar Sesión</h2>
         <FormControl
           onChange={formOnChange}
           className="card flex-shrink-0 w-full max-w-sm shadow-2xl p-5"
         >
+          {/* input: matricula o numero de trabajador */}
           <Input
             id="id"
             placeholder={`${
@@ -142,6 +154,7 @@ export default function LoginInput(props: Props) {
             name="id"
           />
 
+          {/* input: password */}
           <InputGroup size="md">
             <Input
               id="password"
@@ -152,11 +165,13 @@ export default function LoginInput(props: Props) {
               name="password"
             />
             <InputRightElement width="4.5rem" className="my-5">
+              {/* boton: mostar u ocultar password */}
               <Button h="1.75rem" size="sm" onClick={handleClick}>
                 {show ? "Hide" : "Show"}
               </Button>
             </InputRightElement>
           </InputGroup>
+          {/* mensaje de error */}
           <Alert
             status="warning"
             style={{ display: `${showErrorMesagge ? "" : "none"}` }}

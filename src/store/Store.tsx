@@ -25,6 +25,9 @@ type Actions = {
   setCurrentPatient: (currentPatient: { matricula: string }) => void;
 };
 
+/**
+ * guarda los estados en localhost
+ */
 export const useUserData = create(
   persist<State & Actions>(
     (set) => ({

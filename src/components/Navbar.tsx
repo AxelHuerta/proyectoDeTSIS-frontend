@@ -16,6 +16,10 @@ type menuOption = {
   link: string;
 };
 
+/**
+ * componente del navbar
+ * @component
+ */
 export default function Navbar() {
   // localhost
   const {
@@ -33,7 +37,7 @@ export default function Navbar() {
 
   const navigate = useNavigate();
 
-  // TODO: psychiatrist links
+  // opciones del menu
   const menuOptions: menuOption[] = [
     {
       text: "Inicio",
@@ -51,7 +55,9 @@ export default function Navbar() {
     },
   ];
 
-  // logout
+  /**
+   * termina la sesion
+   */
   const logout = () => {
     setIsAuth(false);
     setNombres("");

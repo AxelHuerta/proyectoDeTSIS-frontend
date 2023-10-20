@@ -6,6 +6,10 @@ type Props = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
+/**
+ * switch de un formulario
+ * @component
+ */
 export default function InputSwitch(props: Props) {
   return (
     <div className="flex justify-between  w-full my-4 px-4">

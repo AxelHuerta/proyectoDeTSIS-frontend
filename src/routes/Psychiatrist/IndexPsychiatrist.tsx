@@ -9,11 +9,17 @@ import {
 } from "@chakra-ui/react";
 import Navbar from "../../components/Navbar";
 
+/**
+ * muestra el index para los psiquiatras
+ * @component
+ */
 function IndexPsychiatrist() {
   return (
     <div>
+      {/* menu */}
       <Navbar />
       <div className="pt-32 max-w-[1080px] mx-auto">
+        {/* titulo */}
         <h1 className="text-2xl font-bold text-center">
           Portal de Servicios Psicológicos Integrados
         </h1>

@@ -18,9 +18,15 @@ import { Cita } from "../../types/Cita";
 import axios from "axios";
 import { format } from "date-fns";
 
+/**
+ * muestra los detalles de una cita
+ * @component
+ */
 export default function AppointmentDetails() {
+  // para el id y la matricula de la cita seleccionada
   const { currentCita } = useUserData((state) => state);
 
+  // datos de la cita
   const [cita, setCita] = useState<Cita>({
     id: 0,
     NumTrabajador: "",
@@ -32,19 +38,24 @@ export default function AppointmentDetails() {
     migrante: false,
     discapacidad: false,
   });
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
+  // id de la ruta
   const { citaId } = useParams();
 
-  // p css styles
+  // estilos de los parrafos
   const pStyles = "flex justify-between md:grid md:grid-cols-2 my-4 border-b";
 
-  // alert variables
+  // variables de la alerta
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef<HTMLButtonElement | null>(null);
 
   const navigate = useNavigate();
 
+  /**
+   * hace la peticion de una cita
+   */
   const handleCita = async () => {
     await axios
       .get(
@@ -68,6 +79,9 @@ export default function AppointmentDetails() {
       .catch((error) => console.log(error));
   };
 
+  /**
+   * hace la peticion del borrado de una cita
+   */
   const handleDeleteCita = async () => {
     await axios
       .delete(
@@ -86,6 +100,7 @@ export default function AppointmentDetails() {
     handleCita();
   }, []);
 
+  // pantalla de carga
   if (isLoading) {
     return (
       <>

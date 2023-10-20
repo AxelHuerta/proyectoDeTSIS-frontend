@@ -5,6 +5,10 @@ type Props = {
   child: ReactNode;
 };
 
+/**
+ * tabla y cabecera de la tabla
+ * @component
+ */
 export default function Table(props: Props) {
   return (
     <div className="w-[90%] max-w-[1080px] mx-auto mt-4">
@@ -13,6 +17,7 @@ export default function Table(props: Props) {
           return <li key={title}>{title}</li>;
         })}
       </ul>
+      {/* cuerpo de la tabla */}
       {props.child}
     </div>
   );

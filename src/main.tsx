@@ -14,6 +14,7 @@ import AppointmentDetails from "./routes/Psychiatrist/AppointmentDetails.tsx";
 import Article1 from "./routes/articles/article1.tsx";
 import PatientDetails from "./routes/Psychiatrist/PatientDetails.tsx";
 
+// rutas
 const router = createBrowserRouter([
   {
     path: "/",
