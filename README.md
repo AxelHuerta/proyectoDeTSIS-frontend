@@ -1,27 +1,48 @@
-# React + TypeScript + Vite
+# 📝 Proyecto de TSIS (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend para el proyecto de la UEA de Temas Selectos de Ingeniería de Software. Interfaz de usuario responsiva y dinámica construida con React y Vite para una plataforma de psicología de una universidad.
 
-Currently, two official plugins are available:
+## 🚀 Tecnologías Utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Este proyecto fue desarrollado utilizando el siguiente stack:
 
-## Expanding the ESLint configuration
+- **Lenguaje:** TypeScript
+- **Framework/Librería:** React, Vite
+- **Estilos y Componentes:** Chakra UI, Tailwind CSS, DaisyUI, Framer Motion
+- **Manejo de Estado:** Zustand
+- **Ruteo:** React Router DOM
+- **Peticiones HTTP:** Axios
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 🛠️ Instalación y Uso
 
-- Configure the top-level `parserOptions` property like this:
+Instrucciones rápidas para levantar el proyecto localmente:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+```bash
+# Clonar el repositorio
+git clone https://github.com/axelhuerta/proyectoDeTSIS-frontend.git
+
+# Entrar al directorio
+cd proyectoDeTSIS-frontend
+
+# Instalar dependencias
+pnpm install
+
+# Ejecutar en modo desarrollo
+pnpm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 👥 Contribuidores
+
+Este proyecto fue realizado de manera conjunta. Aunque el repositorio original del backend ya no se encuentra disponible, los desarrolladores involucrados en el proyecto completo fueron:
+
+| Avatar | Usuario | Rol / Aportación |
+| :---: | :--- | :--- |
+| <img src="https://github.com/axelhuerta.png" width="40px;" style="border-radius:50%"/> | [@axelhuerta](https://github.com/axelhuerta) | Desarrollo Frontend |
+| <img src="https://github.com/Ricard0Ponce.png" width="40px;" style="border-radius:50%"/> | [@Ricard0Ponce](https://github.com/Ricard0Ponce) | Desarrollo Backend |
+| <img src="https://github.com/RASECRE.png" width="40px;" style="border-radius:50%"/> | [@RASECRE](https://github.com/RASECRE) | Desarrollo Backend |
+
+## 🏛️ Contexto Académico
+
+- **Institución:** Universidad Autónoma Metropolitana (UAM)
+- **Unidad:** Iztapalapa
+- **UEA:** Temas Selectos de Ingeniería de Software
